@@ -1,13 +1,23 @@
 #include <stdio.h>
 #include<iostream>
 #include<Windows.h>
+
+int Recursive(int n) {
+	if (n <= 1) {
+		return (1);
+	}
+	return (n * 2 - 50);
+}
+
 int main() {
 
-	//コンソールで文字化けを防ぐ
-	SetConsoleOutputCP(65001);
-	char str[] = "ア";
-	printf("%s", str);
+	SetConsoleCP(65001);
+	int n = 100;
+	int result;
 
-	return 0;
+	result = Recursive(n);
+	printf("%dの階乗=%d", n, result);
+	return(0);
+
 
 }
