@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include<iostream>
-#include<Windows.h>
+#include<stdio.h>
+#include"Enemy.h"
 int main() {
+    Enemy enemy;
+    while (true) {
+        enemy.Update();
+        int s;
+        printf("0で次のフェーズ、１でループを抜ける\n");
+        scanf_s("%d", &s);
+        if (s == 1) {
+            break;
+        }
+    }
 
-	//コンソールで文字化けを防ぐ
-	SetConsoleOutputCP(65001);
-	char str[] = "ア";
-	printf("%s", str);
-
-	return 0;
-
+    return 0;
 }
