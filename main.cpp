@@ -1,19 +1,20 @@
-#include<stdio.h>
-#include"Circle.h"
-#include"Rectangle.h"
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+void PrintThread(uint32_t num) {
+	cout << "thread " << num << endl;//No
+}
+
 int main() {
 
-	IShape* iShape[2];
-	iShape[0] = new Circle;
-	iShape[1] = new Rectangle;
-
-	for (int i = 0; i < 2; i++) {
-		iShape[i]->Size();
-		iShape[i]->Draw();
-	}
-	for (int i = 0; i < 2; i++) {
-		delete	iShape[i];
-	}
+	thread t1(PrintThread, 1);
+	t1.join();
+	thread t2(PrintThread, 2);
+	t2.join();
+	thread t3(PrintThread, 3);
+	t3.join();
 
 	return 0;
 }
