@@ -1,18 +1,61 @@
-#include<stdio.h>
-#include"Circle.h"
-#include"Rectangle.h"
-int main() {
+#include <stdio.h>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std; int main() {
 
-	IShape* iShape[2];
-	iShape[0] = new Circle;
-	iShape[1] = new Rectangle;
+	list<string> station{
+		"Tokyo", "Kanda", "Akihabara", "Okachimachi", "Ueno",
+		"Uguisudani", "Nippori", "Tabata", "Komagome", "Sugamo",
+		"Otsuka", "Ikebukuro", "Mejiro", "Takadanobaba", "Shin-Okubo",
+		"Shinjyuku", "Yoyogi", "Harajyuku", "Shibuya", "Ebisu",
+		"Meguro", "Gotanda", "Osaki", "Shinagawa", "Tamachi",
+		"Hamamatsucho", "Shimbashi", "Yurakucho"
+	};
 
-	for (int i = 0; i < 2; i++) {
-		iShape[i]->Size();
-		iShape[i]->Draw();
+	printf("1970年\n");
+	//1970年の駅を表示
+	for (auto itr = station.begin(); itr != station.end(); ++itr)
+	{
+		std::cout << *itr << "\n";
 	}
-	for (int i = 0; i < 2; i++) {
-		delete	iShape[i];
+
+	printf("\n2019年\n");
+
+	//要素の追加
+	for (std::list<string>::iterator itr = station.begin(); itr != station.end(); ++itr)
+	{
+		if (*itr == "Tabata")
+		{
+			itr = station.insert(itr, "Nishi-Nippori");
+			++itr;
+		}
+	}
+
+	//2019年の駅を表示
+	for (auto itr = station.begin(); itr != station.end(); ++itr)
+	{
+		std::cout << *itr << "\n";
+	}
+
+
+	printf("\n2022年\n");
+
+	//要素の追加
+	for (std::list<string>::iterator itr = station.begin(); itr != station.end(); ++itr)
+	{
+		if (*itr == "Tamachi")
+		{
+			itr = station.insert(itr, "Takanawa-Geteway");
+			++itr;
+		}
+	}
+
+	//2022年の駅を表示
+	for (auto itr = station.begin(); itr != station.end(); ++itr)
+	{
+		std::cout << *itr << "\n";
 	}
 
 	return 0;
