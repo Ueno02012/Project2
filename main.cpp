@@ -1,20 +1,48 @@
+#include <stdio.h>
+#include <string>
 #include <iostream>
-#include <thread>
-
-using namespace std;
-
-void PrintThread(uint32_t num) {
-	cout << "thread " << num << endl;//No
-}
+#include <chrono>
+#include <thread>  // スリープを使用するためにインクルード
 
 int main() {
 
-	thread t1(PrintThread, 1);
-	t1.join();
-	thread t2(PrintThread, 2);
-	t2.join();
-	thread t3(PrintThread, 3);
-	t3.join();
+    printf("100000文字のデータのコピーと移動の処理速度を比較\n");
 
-	return 0;
+    std::string a(1000000, 'a');
+
+    std::string aCopy;
+
+    std::string aMove;
+
+
+    // 開始時刻を取得
+    auto startCopy = std::chrono::high_resolution_clock::now();
+
+    aCopy = a;
+
+    // 終了時刻を取得
+    auto endCopy = std::chrono::high_resolution_clock::now();
+
+    // 経過時間をマイクロ秒単位で計算
+    auto durationCopy = std::chrono::duration_cast<std::chrono::microseconds>(endCopy - startCopy);
+
+    // 結果を表示
+    std::cout << "コピー時間: " << durationCopy.count() << " μs\n";
+
+    ///移動
+    // 開始時刻を取得
+    auto startMove = std::chrono::high_resolution_clock::now();
+
+    aMove = std::move(a);
+
+    // 終了時刻を取得
+    auto endMove = std::chrono::high_resolution_clock::now();
+
+    // 経過時間をマイクロ秒単位で計算
+    auto durationMove = std::chrono::duration_cast<std::chrono::microseconds>(endMove - startMove);
+
+    // 結果を表示
+    std::cout << "移動時間: " << durationMove.count() << " μs\n";
+
+    return 0;
 }
